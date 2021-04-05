@@ -1,4 +1,7 @@
 from enum import Enum
+import logging
+
+logging.basicConfig(filename='app.log', filemode='w', format='%(asctime)s - %(message)s',level=logging.DEBUG)
 
 class Pos(Enum):
     W = 'W'
@@ -35,6 +38,12 @@ class Action(Enum):
     NONE = 'NONE'
     
 pos = Pos('C')
+# Discount Factor
+GAMMA = 0.999
+# Convergence or Bellman error
+DELTA = 1e-3
+STEP_COST = -10
+
 print(pos)
 if pos == Pos('C'):
     print('C')
@@ -43,3 +52,5 @@ try:
 except ValueError as e:
     print("invalid Size (", e.args[0].split()[0],
           "). Size must be one of 'small', 'medium' or 'big'", sep='')
+
+logging.debug("(<pos>,<mat>,<arrow>,<state>,<health>):<action>=[<state_value>]")
